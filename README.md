@@ -21,9 +21,10 @@ from ofxhome import OFXHome
 
 s = OFXHome.search("USAA")
 " 's' contains a list that has entries like so:
-" { name: 'USAA FSB', id: '24234234234' }
-" { name: 'USAA Brokerage Services', id: '6564724124' }
+" { name: 'USAA Federal Savings Bank', id: '483' }
+" { name: 'USAA Investment Mgmt Co', id: '665' }
 for item in s:
-    print item.id _ item.name
+    print item['id'] _ item['name']
     bank = OFXHome.lookup(item.id)
-    print bank.name _ bank.fid _ bank.url
+    print bank.name _ bank.fid _ bank.url _ bank.brokerid # OR
+    print bank['name'] _ bank['fid'] _ bank['url'] _ bank['brokerid']

@@ -83,6 +83,9 @@ class InstitutionList:
     def from_file(file):
         return InstitutionList(open(file,'r').read())
 
+    def __getitem__(self,item):
+        return self.items[item]
+
     def __len__(self):
         return len(self.items)
 
@@ -111,6 +114,12 @@ class Institution:
         self.lastsslvalidation = datetime.strptime(_text(root,'lastsslvalidation'),"%Y-%m-%d %H:%M:%S")
 
         self.xml = xml
+
+    def __getitem__(self,item):
+        return self.__dict__[item]
+
+    def __setitem__(self,item,value):
+        self.__dict__[item] = value
 
     @staticmethod
     def from_file(file):
