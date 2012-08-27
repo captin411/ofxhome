@@ -72,21 +72,23 @@ def _xml_request(params=None):
 #---------------------------------------------
 class InstitutionList:
     def __init__(self,xml):
+        root = parseString(xml).documentElement
+        data = []
+        for node in root.getElementsByTagName('institutionid'):
+            data.append({ 'name': _attr(node,'name'), 'id': _attr(node,'id') })
+        self.items = data
         self.xml = xml
-        self.xml_parsed = parseString(self.xml)
 
     @staticmethod
     def from_file(file):
         return InstitutionList(open(file,'r').read())
 
-    def list(self):
-        root = self.xml_parsed.documentElement
-        data = []
-        for node in root.getElementsByTagName('institutionid'):
-            yield { 'name': _attr(node,'name'), 'id': _attr(node,'id') }
+    def __len__(self):
+        return len(self.items)
 
     def __iter__(self):
-        return self.list()
+        for i in self.items:
+            yield i
 
     def __str__(self):
         return self.xml

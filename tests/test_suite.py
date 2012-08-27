@@ -25,12 +25,40 @@ class InstitutionTestCase(unittest.TestCase):
         with self.assertRaises(Exception):
             i = Institution(xml)
 
-def testfile(filename):
-    ''' Load a file from the fixtures directory. '''
+class InstitutionListTestCase(unittest.TestCase):
+    def testFromFile(self):
+        l = InstitutionList.from_file( testfile_name('search_america.xml') )
+        self.assertEquals(len(l),15)
+    def testGoodResult(self):
+        xml = testfile('search_america.xml').read()
+        l = InstitutionList(xml)
+        self.assertEquals(len(l),15)
+        self.assertEquals(l.xml,xml)
+    def testResultWithPHPError(self):
+        xml = testfile('search_noexist.xml').read()
+        l = InstitutionList(xml)
+        self.assertEquals(len(l),0)
+        self.assertEquals(l.xml,xml)
+    def testIterator(self):
+        count = 0
+        xml = testfile('search_america.xml').read()
+        l = InstitutionList(xml)
+        for i in l:
+            count += 1
+        self.assertEquals(count,15)
+    def testBadXML(self):
+        xml = testfile('badxml_search.xml').read()
+        with self.assertRaises(Exception):
+            l = InstitutionList(xml)
+
+def testfile_name(filename):
     path = 'testfiles/' + filename
     if ('tests' in os.listdir('.')):
         path = 'tests/' + path
-    return file(path)
+    return path
+
+def testfile(filename):
+    return file(testfile_name(filename))
 
 
 if __name__ == '__main__':
