@@ -1,2 +1,4 @@
 *.pyc
 ofxhome.egg-info
+build
+dist
