@@ -22,11 +22,7 @@ setup(name='ofxhome',
       packages=find_packages(exclude=['ez_setup', 'examples', 'tests']),
       include_package_data=True,
       zip_safe=True,
-      install_requires=[
-          "datetime",
-          "urllib",
-          "xml.dom.minidom",
-      ],
+      install_requires=[ ],
       entry_points="""
       """,
       )
