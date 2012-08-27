@@ -8,14 +8,46 @@ class OFXHome:
 
     @staticmethod
     def lookup(id):
+        """
+        Get financial institution OFX info given an ofxhome.com 'id'
+
+        Returns: Institution
+
+        bank = OFXHome.lookup('456')
+        print bank.name _ bank.url _ bank.fid
+        """
         return Institution(_xml_request({ 'lookup': id }))
 
     @staticmethod
     def all():
+        """
+        List every available bank that ofxhome.com knows about
+
+        Returns: InstitutionList
+
+        See also: OFXHome.search()
+        """
         return search()
 
     @staticmethod
     def search(name=None):
+        """
+        Search for a financial institution by name.
+
+        Returns: InstitutionList
+
+        If no name is provided , or a name of None is provided then
+        it is the same as calling OFXHome.all().  Note that passing a
+        string of '' will not be the same thing and will result in no
+        results.
+
+        banks = OFXHome.search('America')
+        for res in banks:
+            print res.id _ res.name
+
+            bank = OFXHome.lookup(res.id)
+            print bank.name _ bank.url _ bank.fid
+        """
         if name is None:
             params = { 'all': 'yes' }
         else:
@@ -61,33 +93,23 @@ class InstitutionList:
 #---------------------------------------------
 class Institution:
     def __init__(self,xml):
+
+        dom = parseString(xml)
+        root = dom.documentElement
+
+        self.id = _attr(root,'id')
+        self.name = _text(root,'name')
+        self.fid = _text(root,'fid')
+        self.org = _text(root,'org')
+        self.url = _text(root,'url')
+        self.brokerid = _text(root,'brokerid')
+        self.ofxfail = _text(root,'ofxfail')
+        self.sslfail = _text(root,'sslfail')
+        self.lastofxvalidation = datetime.strptime(_text(root,'lastofxvalidation'),"%Y-%m-%d %H:%M:%S")
+        self.lastsslvalidation = datetime.strptime(_text(root,'lastsslvalidation'),"%Y-%m-%d %H:%M:%S"),
+
         self.xml = xml
-        self.xml_parsed = parseString(self.xml)
 
     @staticmethod
     def from_file(file):
         return Institution(open(file,'r').read())
-
-    def dict(self):
-        dom = self.xml_parsed
-        root = dom.documentElement
-        data = {
-            'id': _attr(root,'id'),
-            'name': _text(root,'name'),
-            'fid': _text(root,'fid'),
-            'org': _text(root,'org'),
-            'url': _text(root,'url'),
-            'brokerid': _text(root,'brokerid'),
-            'ofxfail': _text(root,'ofxfail'),
-            'sslfail': _text(root,'sslfail'),
-            'lastofxvalidation': datetime.strptime(_text(root,'lastofxvalidation'),"%Y-%m-%d %H:%M:%S"),
-            'lastsslvalidation': datetime.strptime(_text(root,'lastsslvalidation'),"%Y-%m-%d %H:%M:%S"),
-        }
-        return data
-
-    def __repr__(self):
-        return str(self.dict())
-
-    def __str__(self):
-        return self.xml
-
