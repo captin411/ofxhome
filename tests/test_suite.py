@@ -5,6 +5,7 @@ import unittest
 import datetime
 
 class InstitutionTestCase(unittest.TestCase):
+
     def testGoodParse(self):
         xml = testfile('scottrade.xml').read()
         i = Institution(xml)
@@ -19,6 +20,11 @@ class InstitutionTestCase(unittest.TestCase):
         self.assertEquals(i.lastofxvalidation,datetime.datetime(2012,8,13,22,28,10))
         self.assertEquals(i.lastsslvalidation,datetime.datetime(2011,9,28,22,22,22))
         self.assertEquals(i.xml, xml)
+
+    def testFromFile(self):
+        i = Institution.from_file( testfile_name('scottrade.xml') )
+        self.assertEquals(i.id,'623')
+        self.assertEquals(i['id'],'623')
 
     def testDictKeys(self):
         xml = testfile('scottrade.xml').read()
@@ -35,6 +41,7 @@ class InstitutionTestCase(unittest.TestCase):
             i = Institution(xml)
 
 class InstitutionListTestCase(unittest.TestCase):
+
     def testFromFile(self):
         l = InstitutionList.from_file( testfile_name('search_america.xml') )
         self.assertEquals(len(l),15)
