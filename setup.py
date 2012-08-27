@@ -23,6 +23,7 @@ setup(name='ofxhome',
       include_package_data=True,
       zip_safe=True,
       install_requires=[ ],
+      test_suite = 'tests',
       entry_points="""
       """,
       )

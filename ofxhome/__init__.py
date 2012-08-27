@@ -106,7 +106,7 @@ class Institution:
         self.ofxfail = _text(root,'ofxfail')
         self.sslfail = _text(root,'sslfail')
         self.lastofxvalidation = datetime.strptime(_text(root,'lastofxvalidation'),"%Y-%m-%d %H:%M:%S")
-        self.lastsslvalidation = datetime.strptime(_text(root,'lastsslvalidation'),"%Y-%m-%d %H:%M:%S"),
+        self.lastsslvalidation = datetime.strptime(_text(root,'lastsslvalidation'),"%Y-%m-%d %H:%M:%S")
 
         self.xml = xml
 

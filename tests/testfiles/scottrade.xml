@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<institution id="623">
+<name>Scottrade, Inc.</name>
+<fid>777</fid>
+<org>Scottrade</org>
+<brokerid>www.scottrade.com</brokerid>
+<url>https://ofxstl.scottsave.com</url>
+<ofxfail>0</ofxfail>
+<sslfail>4</sslfail>
+<lastofxvalidation>2012-08-13 22:28:10</lastofxvalidation>
+<lastsslvalidation>2011-09-28 22:22:22</lastsslvalidation>
+</institution>
