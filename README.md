@@ -1,7 +1,7 @@
 ofxhome
 =========
 
-This is a REST client for the web services provided at ofxhome.com
+REST client for the web service provided by ofxhome.com
 
 ofxhome.com provides a way to discover the Open Financial Exchange (OFX) URL's and financial institution IDs for banks and other financial institutions.
 
