@@ -20,6 +20,11 @@ class InstitutionTestCase(unittest.TestCase):
         self.assertEquals(i.lastsslvalidation,datetime.datetime(2011,9,28,22,22,22))
         self.assertEquals(i.xml, xml)
 
+    def testBadParse(self):
+        xml = testfile('badxml_bank.xml').read()
+        with self.assertRaises(Exception):
+            i = Institution(xml)
+
 def testfile(filename):
     ''' Load a file from the fixtures directory. '''
     path = 'testfiles/' + filename
