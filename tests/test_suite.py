@@ -37,8 +37,11 @@ class InstitutionTestCase(unittest.TestCase):
 
     def testBadParse(self):
         xml = testfile('badxml_bank.xml').read()
-        with self.assertRaises(Exception):
-            i = Institution(xml)
+        try:
+            l = Institution(xml)
+            self.assertFalse(0)
+        except Exception:
+            self.assertTrue(1)
 
 class InstitutionListTestCase(unittest.TestCase):
 
@@ -70,8 +73,11 @@ class InstitutionListTestCase(unittest.TestCase):
 
     def testBadXML(self):
         xml = testfile('badxml_search.xml').read()
-        with self.assertRaises(Exception):
+        try:
             l = InstitutionList(xml)
+            self.assertFalse(0)
+        except Exception:
+            self.assertTrue(1)
 
 def testfile_name(filename):
     path = 'testfiles/' + filename
