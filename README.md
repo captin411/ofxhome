@@ -17,6 +17,7 @@ ofxclient - a python API that downloads transactions from banks
 example
 =======
 
+```python
 from ofxhome import OFXHome
 
 s = OFXHome.search("USAA")
@@ -28,3 +29,4 @@ for item in s:
     bank = OFXHome.lookup(item.id)
     print bank.name _ bank.fid _ bank.url _ bank.brokerid # OR
     print bank['name'] _ bank['fid'] _ bank['url'] _ bank['brokerid']
+```
