@@ -2,6 +2,8 @@ import urllib
 from datetime import datetime
 from xml.dom.minidom import parseString
 
+__version__ = '0.3.1'
+
 API_URL='http://www.ofxhome.com/api.php'
 
 class OFXHome:
