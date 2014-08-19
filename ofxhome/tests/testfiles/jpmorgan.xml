@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<institution id="435">
+<name>JPMorgan Chase Bank</name>
+<fid>1601</fid>
+<org>Chase Bank</org>
+<url>https://www.oasis.cfree.com/1601.ofxgp</url>
+<ofxfail>0</ofxfail>
+<sslfail>0</sslfail>
+<lastofxvalidation>2014-08-17 22:23:35</lastofxvalidation>
+<lastsslvalidation>2014-08-17 22:23:34</lastsslvalidation>
+</institution>

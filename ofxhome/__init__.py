@@ -2,7 +2,7 @@ import urllib
 from datetime import datetime
 from xml.dom.minidom import parseString
 
-__version__ = '0.3.1'
+__version__ = '0.3.2'
 
 API_URL='http://www.ofxhome.com/api.php'
 
@@ -61,7 +61,10 @@ def _attr(node,name):
 
 def _text(parent,name):
     rc = []
-    for node in parent.getElementsByTagName(name)[0].childNodes:
+    elements = parent.getElementsByTagName(name)
+    if not elements:
+        return ''
+    for node in elements[0].childNodes:
         if node.nodeType == node.TEXT_NODE:
             rc.append(node.data)
     return ''.join(rc)

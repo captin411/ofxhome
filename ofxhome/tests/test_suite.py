@@ -1,5 +1,4 @@
-import sys, os
-sys.path.append('..')
+import sys, os, os.path
 from ofxhome import OFXHome, Institution, InstitutionList
 import unittest
 import datetime
@@ -19,6 +18,21 @@ class InstitutionTestCase(unittest.TestCase):
         self.assertEquals(i.sslfail,'4')
         self.assertEquals(i.lastofxvalidation,datetime.datetime(2012,8,13,22,28,10))
         self.assertEquals(i.lastsslvalidation,datetime.datetime(2011,9,28,22,22,22))
+        self.assertEquals(i.xml, xml)
+
+    def testOptionalBroker(self):
+        xml = testfile('jpmorgan.xml').read()
+        i = Institution(xml)
+        self.assertEquals(i.id,'435')
+        self.assertEquals(i.name,'JPMorgan Chase Bank')
+        self.assertEquals(i.fid,'1601')
+        self.assertEquals(i.org,'Chase Bank')
+        self.assertEquals(i.brokerid,'')
+        self.assertEquals(i.url,'https://www.oasis.cfree.com/1601.ofxgp')
+        self.assertEquals(i.ofxfail,'0')
+        self.assertEquals(i.sslfail,'0')
+        self.assertEquals(i.lastofxvalidation,datetime.datetime(2014,8,17,22,23,35))
+        self.assertEquals(i.lastsslvalidation,datetime.datetime(2014,8,17,22,23,34))
         self.assertEquals(i.xml, xml)
 
     def testFromFile(self):
@@ -80,9 +94,11 @@ class InstitutionListTestCase(unittest.TestCase):
             self.assertTrue(1)
 
 def testfile_name(filename):
-    path = 'testfiles/' + filename
+    base_path = os.path.dirname(os.path.abspath(__file__))
+
+    path = os.path.join(base_path,'testfiles',filename)
     if ('tests' in os.listdir('.')):
-        path = 'tests/' + path
+        path = os.path.join('tests',path)
     return path
 
 def testfile(filename):

@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(name='ofxhome',
-      version="0.3.1",
+      version="0.3.2",
       description="ofxhome.com financial institution lookup REST client",
       long_description=open("./README", "r").read(),
       classifiers=[
@@ -19,11 +19,11 @@ setup(name='ofxhome',
       author_email='captindave@gmail.com',
       url='https://github.com/captin411/ofxhome',
       license='MIT License',
-      packages=find_packages(exclude=['ez_setup', 'examples', 'tests']),
+      packages=find_packages(exclude=['ez_setup', 'examples']),
       include_package_data=True,
       zip_safe=True,
       install_requires=[ ],
-      test_suite = 'tests',
+      test_suite = 'ofxhome.tests',
       entry_points="""
       """,
       )
