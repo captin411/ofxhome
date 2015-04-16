@@ -29,7 +29,7 @@ class OFXHome:
 
         See also: OFXHome.search()
         """
-        return search()
+        return OFXHome.search()
 
     @staticmethod
     def search(name=None):
