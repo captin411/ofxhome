@@ -102,7 +102,7 @@ def testfile_name(filename):
     return path
 
 def testfile(filename):
-    return file(testfile_name(filename))
+    return open(testfile_name(filename))
 
 
 if __name__ == '__main__':

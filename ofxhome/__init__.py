@@ -1,4 +1,12 @@
-import urllib
+try:
+    # Python3 case
+    from urllib.parse import urlencode
+    from urllib.request import urlopen
+except ImportError:
+    # Python2 case
+    from urllib import urlencode
+    from urllib2 import urlopen
+
 from datetime import datetime
 from xml.dom.minidom import parseString
 
@@ -70,8 +78,8 @@ def _text(parent,name):
     return ''.join(rc)
 
 def _xml_request(params=None):
-    encoded = urllib.urlencode(params)
-    xml = urllib.urlopen("%s?%s" % (API_URL,encoded)).read()
+    encoded = urlencode(params)
+    xml = urlopen("%s?%s" % (API_URL,encoded)).read()
     return xml
 
 #---------------------------------------------
