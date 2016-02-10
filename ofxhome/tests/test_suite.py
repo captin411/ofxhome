@@ -6,7 +6,8 @@ import datetime
 class InstitutionTestCase(unittest.TestCase):
 
     def testGoodParse(self):
-        xml = testfile('scottrade.xml').read()
+        with testfile('scottrade.xml') as f:
+            xml = f.read()
         i = Institution(xml)
         self.assertEquals(i.id,'623')
         self.assertEquals(i.name,'Scottrade, Inc.')
@@ -21,7 +22,8 @@ class InstitutionTestCase(unittest.TestCase):
         self.assertEquals(i.xml, xml)
 
     def testOptionalBroker(self):
-        xml = testfile('jpmorgan.xml').read()
+        with testfile('jpmorgan.xml') as f:
+            xml = f.read()
         i = Institution(xml)
         self.assertEquals(i.id,'435')
         self.assertEquals(i.name,'JPMorgan Chase Bank')
@@ -41,7 +43,8 @@ class InstitutionTestCase(unittest.TestCase):
         self.assertEquals(i['id'],'623')
 
     def testDictKeys(self):
-        xml = testfile('scottrade.xml').read()
+        with testfile('scottrade.xml') as f:
+            xml = f.read()
         i = Institution(xml)
         self.assertEquals(i['id'],'623')
         self.assertEquals(i['name'],'Scottrade, Inc.')
@@ -50,7 +53,8 @@ class InstitutionTestCase(unittest.TestCase):
         self.assertEquals(i['id'],'123')
 
     def testBadParse(self):
-        xml = testfile('badxml_bank.xml').read()
+        with testfile('badxml_bank.xml') as f:
+            xml = f.read()
         try:
             l = Institution(xml)
             self.assertFalse(0)
@@ -64,7 +68,8 @@ class InstitutionListTestCase(unittest.TestCase):
         self.assertEquals(len(l),15)
 
     def testGoodResult(self):
-        xml = testfile('search_america.xml').read()
+        with testfile('search_america.xml') as f:
+            xml = f.read()
         l = InstitutionList(xml)
         self.assertEquals(len(l),15)
         self.assertEquals(l.xml,xml)
@@ -72,21 +77,24 @@ class InstitutionListTestCase(unittest.TestCase):
         self.assertEquals(l[0]['name'],'America First Credit Union')
 
     def testResultWithPHPError(self):
-        xml = testfile('search_noexist.xml').read()
+        with testfile('search_noexist.xml') as f:
+            xml = f.read()
         l = InstitutionList(xml)
         self.assertEquals(len(l),0)
         self.assertEquals(l.xml,xml)
 
     def testIterator(self):
         count = 0
-        xml = testfile('search_america.xml').read()
+        with testfile('search_america.xml') as f:
+            xml = f.read()
         l = InstitutionList(xml)
         for i in l:
             count += 1
         self.assertEquals(count,15)
 
     def testBadXML(self):
-        xml = testfile('badxml_search.xml').read()
+        with testfile('badxml_search.xml') as f:
+            xml = f.read()
         try:
             l = InstitutionList(xml)
             self.assertFalse(0)

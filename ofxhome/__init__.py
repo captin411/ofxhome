@@ -94,7 +94,9 @@ class InstitutionList:
 
     @staticmethod
     def from_file(file):
-        return InstitutionList(open(file,'r').read())
+        with open(file, 'r') as f:
+            data = f.read()
+        return InstitutionList(data)
 
     def __getitem__(self,item):
         return self.items[item]
@@ -136,4 +138,6 @@ class Institution:
 
     @staticmethod
     def from_file(file):
-        return Institution(open(file,'r').read())
+        with open(file, 'r') as f:
+            data = f.read()
+        return Institution(data)
