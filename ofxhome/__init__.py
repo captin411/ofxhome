@@ -10,7 +10,7 @@ except ImportError:
 from datetime import datetime
 from xml.dom.minidom import parseString
 
-__version__ = '0.3.2'
+__version__ = '0.3.3'
 
 API_URL='http://www.ofxhome.com/api.php'
 
