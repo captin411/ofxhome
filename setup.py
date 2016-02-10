@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(name='ofxhome',
-      version="0.3.2",
+      version="0.3.3",
       description="ofxhome.com financial institution lookup REST client",
       long_description=open("./README", "r").read(),
       classifiers=[

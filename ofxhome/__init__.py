@@ -10,7 +10,7 @@ except ImportError:
 from datetime import datetime
 from xml.dom.minidom import parseString
 
-__version__ = '0.3.2'
+__version__ = '0.3.3'
 
 API_URL='http://www.ofxhome.com/api.php'
 
@@ -94,7 +94,9 @@ class InstitutionList:
 
     @staticmethod
     def from_file(file):
-        return InstitutionList(open(file,'r').read())
+        with open(file, 'r') as f:
+            data = f.read()
+        return InstitutionList(data)
 
     def __getitem__(self,item):
         return self.items[item]
@@ -136,4 +138,6 @@ class Institution:
 
     @staticmethod
     def from_file(file):
-        return Institution(open(file,'r').read())
+        with open(file, 'r') as f:
+            data = f.read()
+        return Institution(data)
